@@ -22,10 +22,11 @@ function classNames(...classes) {
 }
 
 export default function Example(props) {
+    console.log(props.userState[0].imageUrl)
     return (
         <>
             <div className="min-h-full">
-                <Disclosure as="nav" className="bg-gray-800">
+                <Disclosure as="nav" className="">
                     {({ open }) => (
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,8 +47,8 @@ export default function Example(props) {
                                                         href={item.href}
                                                         className={classNames(
                                                             item.current
-                                                                ? 'bg-gray-900 text-white'
-                                                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                                ? 'bg-white text-black'
+                                                                : 'text-black hover:bg-gray-200 hover:text-black',
                                                             'px-3 py-2 rounded-md text-sm font-medium'
                                                         )}
                                                         aria-current={item.current ? 'page' : undefined}
@@ -60,13 +61,13 @@ export default function Example(props) {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
-                                            <button
+                                            {/* <button
                                                 type="button"
                                                 className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                             >
                                                 <span className="sr-only">View notifications</span>
                                                 <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                            </button>
+                                            </button> */}
 
                                             {/* Profile dropdown */}
                                             <Menu as="div" className="ml-3 relative">
@@ -108,7 +109,7 @@ export default function Example(props) {
                                     </div>
                                     <div className="-mr-2 flex md:hidden">
                                         {/* Mobile menu button */}
-                                        <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                        <Disclosure.Button className="bg-white inline-flex items-center justify-center p-2 rounded-md text-black hover:black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white">
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
                                                 <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -128,7 +129,7 @@ export default function Example(props) {
                                             as="a"
                                             href={item.href}
                                             className={classNames(
-                                                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                item.current ? 'bg-white text-black' : 'text-black hover:bg-gray-200 hover:black',
                                                 'block px-3 py-2 rounded-md text-base font-medium'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
@@ -143,16 +144,9 @@ export default function Example(props) {
                                             <img className="h-10 w-10 rounded-full" src={props.userState[0].imageUrl} alt="" />
                                         </div>
                                         <div className="ml-3">
-                                            <div className="text-base font-medium leading-none text-white">{props.userState[0].name}</div>
-                                            <div className="text-sm font-medium leading-none text-gray-400">{props.userState[0].email}</div>
+                                            <div className="text-base font-medium leading-none text-black">{props.userState[0].name}</div>
+                                            <div className="text-sm font-medium leading-none text-gray-800">{props.userState[0].email}</div>
                                         </div>
-                                        <button
-                                            type="button"
-                                            className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                        >
-                                            <span className="sr-only">View notifications</span>
-                                            <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                        </button>
                                     </div>
                                     <div className="mt-3 px-2 space-y-1">
                                         {userNavigation.map((item) => (
@@ -160,7 +154,7 @@ export default function Example(props) {
                                                 key={item.name}
                                                 as="a"
                                                 href={item.href}
-                                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                                                className="block px-3 py-2 rounded-md text-base font-medium text-black hover:black hover:bg-gray-200"
                                             >
                                                 {item.name}
                                             </Disclosure.Button>

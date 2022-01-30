@@ -1,6 +1,7 @@
 import React from "react";
 import logo from './logo.svg';
 import Landing from './pages/Landing';
+import Nav from './components/Nav';
 function App() {
   const [user, setUser] = React.useState({
     name: 'Tom Cook',
@@ -9,7 +10,10 @@ function App() {
   });
 
   return (
-    <Landing userState={[user, setUser]} />
+    <div>
+      <Nav userState={[user, setUser]} />
+      <Landing userState={[user, setUser]} />
+    </div>
   );
 }
 
