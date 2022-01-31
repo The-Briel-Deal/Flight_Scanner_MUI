@@ -79,7 +79,6 @@ export default function Nav(props) {
                                                         aria-current={item.current ? 'page' : undefined}
                                                         onClick={func}
                                                         id={item.id}
-                                                        current={false}
                                                     >
                                                         {item.name}
                                                     </Link>
