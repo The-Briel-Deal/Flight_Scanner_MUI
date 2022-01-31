@@ -1,5 +1,5 @@
 import Nav from '../components/Nav';
-import { Button, TextField } from '@mui/material';
+import { Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
 import AirIcon from '@mui/icons-material/Air';
@@ -35,14 +35,48 @@ export default function Example(props) {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="flex flex-col justify-center items-center space-y-5 py-5">
+            <div className="flex flex-col justify-center items-center space-y-5 py-10">
                 <p id="title" className='text-4xl md:text-6xl'><AirIcon style={{ fontSize: "50" }} /> Air Briel <AirplaneTicketIcon style={{ fontSize: "50" }} id="titleIcon" className='text-sm md:text-2xl' /></p>
+                <div className='flex flex-col justify-center items-center space-y-5 py-5'>
+                    <div>
+                        <p id='title' className='text-2xl'>Looking to go on a trip?</p>
+                    </div>
+                </div>
                 <div>
-                    <TextField value={textField} onChange={handleChange} className="" id="filled-basic" label="PFP Link" variant="filled" />
+                    <FormControl fullWidth>
+                        <InputLabel id="select-to">To?</InputLabel>
+                        <Select
+                            labelId="select-to"
+                            id="select-to"
+                            value={"JFK"}
+                            label="select-to"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"JFK"}>JFK - New York, NY</MenuItem>
+                            <MenuItem value={"LAX"}>LAX - Los Angelas, CA</MenuItem>
+                            <MenuItem value={"TPA"}>TPA - Tampa, FL</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl fullWidth>
+                        <InputLabel id="select-from">From?</InputLabel>
+                        <Select
+                            labelId="select-from"
+                            id="select-from"
+                            value={"JFK"}
+                            label="select-from"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"JFK"}>JFK - New York, NY</MenuItem>
+                            <MenuItem value={"LAX"}>LAX - Los Angelas, CA</MenuItem>
+                            <MenuItem value={"TPA"}>TPA - Tampa, FL</MenuItem>
+                        </Select>
+                    </FormControl>
                 </div>
                 <div>
 
-                    <Button onClick={handleSubmit} variant="outlined" className="content-center">Change your PFP</Button>
+                    <Button onClick={handleSubmit} variant="outlined" className="content-center">Lets go!</Button>
                 </div>
             </div>
         </ThemeProvider>

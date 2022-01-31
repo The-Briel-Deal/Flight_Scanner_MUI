@@ -1,28 +1,53 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Link } from 'react-router-dom';
 
 
-const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
-]
+
+
 const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your Profile', to: '#' },
+    { name: 'Settings', to: '#' },
+    { name: 'Sign out', to: '#' },
 ]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example(props) {
-    console.log(props.userState[0].imageUrl)
+export default function Nav(props) {
+    const [newSearch, setNewSearch] = useState(true);
+    const [mySearches, setMySearches] = useState(false);
+    const [aboutUs, setAboutUs] = useState(false);
+    let func = (event) => {
+        if (event.target.id === "newSearch") {
+            setNewSearch(true);
+            setMySearches(false);
+            setAboutUs(false);
+        } else if (event.target.id === "mySearches") {
+            setNewSearch(false);
+            setMySearches(true);
+            setAboutUs(false);
+        } else if (event.target.id === "aboutUs") {
+            setNewSearch(false);
+            setMySearches(false);
+            setAboutUs(true);
+        }
+    }
+    const navigation = [
+        {
+            name: 'New Search 🔎', to: '/', current: newSearch, id: "newSearch"
+        },
+        {
+            name: 'My Searches 🤔', to: '/mysearches', current: mySearches, id: "mySearches"
+        },
+        {
+            name: 'About Us 🧑🏼‍💻', to: '/aboutus', current: aboutUs, id: "aboutUs"
+        },
+    ]
+
     return (
         <>
             <div className="min-h-full">
@@ -42,9 +67,9 @@ export default function Example(props) {
                                         <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
                                                 {navigation.map((item) => (
-                                                    <a
+                                                    <Link
                                                         key={item.name}
-                                                        href={item.href}
+                                                        to={item.to}
                                                         className={classNames(
                                                             item.current
                                                                 ? 'bg-white text-black'
@@ -52,9 +77,12 @@ export default function Example(props) {
                                                             'px-3 py-2 rounded-md text-sm font-medium'
                                                         )}
                                                         aria-current={item.current ? 'page' : undefined}
+                                                        onClick={func}
+                                                        id={item.id}
+                                                        current={false}
                                                     >
                                                         {item.name}
-                                                    </a>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>
@@ -90,15 +118,17 @@ export default function Example(props) {
                                                         {userNavigation.map((item) => (
                                                             <Menu.Item key={item.name}>
                                                                 {({ active }) => (
-                                                                    <a
-                                                                        href={item.href}
+                                                                    <Link
+                                                                        to={item.to}
                                                                         className={classNames(
                                                                             active ? 'bg-gray-100' : '',
                                                                             'block px-4 py-2 text-sm text-gray-700'
-                                                                        )}
+                                                                        )
+                                                                        }
+                                                                        onClick={props.onClick}
                                                                     >
                                                                         {item.name}
-                                                                    </a>
+                                                                    </Link>
                                                                 )}
                                                             </Menu.Item>
                                                         ))}
