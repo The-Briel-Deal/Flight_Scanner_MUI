@@ -1,10 +1,9 @@
-import Nav from '../components/Nav';
-import { Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
 import React from "react";
-import { motion } from "framer-motion";
-import Title from "../components/Title"
+import { AnimatePresence, motion } from "framer-motion";
+import FlightSelectPageOne from "../components/FlightSelectPageOne";
+import FlightSelectPageTwo from "../components/FlightSelectPageTwo"
+import FlightSelectPageThree from '../components/FlightSelectPageThree';
 
 let theme = createTheme({
     palette: {
@@ -23,78 +22,37 @@ theme = createTheme(theme, {
 });
 
 export default function Example(props) {
-    let handleSubmit = () => {
-        setCurrentPage(2);
-    }
-
-
-    let [textField, setTextField] = React.useState("");
-    let handleChange = (event) => {
-        setTextField(event.target.value)
-    }
 
     let [currentPage, setCurrentPage] = React.useState(1);
-    let ReturnCurrentPage = () => {
-        if (currentPage === 1) {
-            return <motion.div
-                key="silly-div1"
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
-            >
-                <div className="flex flex-col justify-center items-center space-y-5 py-10">
-                    <Title />
-                    <ThemeProvider theme={theme}>
-
-
-                        <div className='flex flex-col justify-center items-center space-y-5 py-5'>
-                            <div>
-                                <p id='title' className='text-2xl'>Looking to go on a trip?</p>
-                            </div>
-                        </div>
-                        <div>
-                            <FormControl fullWidth>
-                                <InputLabel id="select-to">To?</InputLabel>
-                                <Select
-                                    labelId="select-to"
-                                    id="select-to"
-                                    value={"JFK"}
-                                    label="select-to"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"JFK"}>JFK - New York, NY</MenuItem>
-                                    <MenuItem value={"LAX"}>LAX - Los Angelas, CA</MenuItem>
-                                    <MenuItem value={"TPA"}>TPA - Tampa, FL</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div>
-                        <div>
-                            <FormControl fullWidth>
-                                <InputLabel id="select-from">From?</InputLabel>
-                                <Select
-                                    labelId="select-from"
-                                    id="select-from"
-                                    value={"JFK"}
-                                    label="select-from"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"JFK"}>JFK - New York, NY</MenuItem>
-                                    <MenuItem value={"LAX"}>LAX - Los Angelas, CA</MenuItem>
-                                    <MenuItem value={"TPA"}>TPA - Tampa, FL</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div>
-                        <div>
-                            <Button onClick={handleSubmit} variant="outlined" className="content-center">Lets go!</Button>
-                        </div>
-                    </ThemeProvider>
-                </div>
-            </motion.div>
-        }
-    }
+    const [searchState, setSearchState] = React.useState({
+        APFrom: "",
+        APTo: "",
+        DateFrom: "",
+        DateTo: ""
+    })
+    console.log(searchState);
     return (
         <div>
-            <ReturnCurrentPage />
+            <AnimatePresence>
+                {(currentPage === 1) && <FlightSelectPageOne
+                    theme={theme}
+                    setSearchState={setSearchState}
+                    setCurrentPage={setCurrentPage}
+                    key="fsp1" />}
+            </AnimatePresence>
+            <AnimatePresence>
+                {(currentPage === 2) && <FlightSelectPageTwo
+                    theme={theme}
+                    setSearchState={setSearchState}
+                    setCurrentPage={setCurrentPage}
+                    key="fsp2" />}
+            </AnimatePresence>
+            <AnimatePresence>
+                {(currentPage === 3) && <FlightSelectPageThree
+                    theme={theme}
+                    searchState={searchState}
+                    key="fsp3" />}
+            </AnimatePresence>
         </div>
     )
 }
