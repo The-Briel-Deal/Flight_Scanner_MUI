@@ -3,17 +3,40 @@ import Title from "./Title";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@mui/system";
 import { Typography, Button } from '@mui/material';
+let firstRun = true;
 export default (props) => {
     let [transitionDelay, setTransitionDelay] = React.useState(.5);
-    console.log(props.searchState)
-    fetch('/search', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(props.searchState)
+    let [returnQuery, setReturnQuery] = React.useState({
+        price: null,
+        connections: null,
+        leaves: null,
+        returns: null,
+        link: null
     })
+
+    console.log(props.searchState)
+    async function postData() {
+        const response = await fetch('/search', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(props.searchState)
+        })
+        return response.json();
+    }
+    if (firstRun) {
+        postData().then((data) => {
+            setReturnQuery({
+                price: data.price,
+                connections: data.connections,
+                leaves: data.leaves,
+                returns: data.returns,
+                link: data.link
+            })
+        })
+        firstRun = false
+    }
     return <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -27,16 +50,14 @@ export default (props) => {
                     The cheapest flight is here!
                 </Typography>
                 <Typography variant='subtitle1'>
-                    Price:<br />
-                    Connection:<br />
-                    Leaves:<br />
-                    Returns
+                    Price: {returnQuery.price}<br />
+                    Connection: {returnQuery.connections}<br />
+                    Leaves:{returnQuery.leaves}<br />
+                    Returns: {returnQuery.returns}
                 </Typography>
                 <Button
                     variant="outlined"
-                    onClick={() => {
-                        props.setCurrentPage(4);
-                    }}
+                    href={returnQuery.link}
                 >Take me!</Button>
                 <Button
                     variant="outlined"
