@@ -3,6 +3,7 @@ import { Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material
 import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
 import React from "react";
+import ReactDom from 'react-dom';
 import { animate, AnimatePresence, motion } from "framer-motion";
 import Title from "../components/Title"
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -12,17 +13,24 @@ import TextField from '@mui/material/TextField';
 
 export default (props) => {
     let handleSubmit = () => {
-        props.setSearchState((prev) => {
-            prev.DateFrom = valueFrom;
-            prev.DateTo = valueTo;
-            return {
-                APFrom: prev.APFrom,
-                APTo: prev.APTo,
-                DateFrom: prev.DateFrom,
-                DateTo: prev.DateTo
-            }
-        })
-        props.setCurrentPage(3);
+        if (valueFrom && valueTo) {
+            props.setSearchState((prev) => {
+                prev.DateFrom = valueFrom;
+                prev.DateTo = valueTo;
+                return {
+                    APFrom: prev.APFrom,
+                    APTo: prev.APTo,
+                    DateFrom: prev.DateFrom,
+                    DateTo: prev.DateTo
+                }
+            })
+            props.setCurrentPage(3);
+        } else {
+            ReactDom.render(
+                <h3 className='text-red-500'>Please choose dates</h3>,
+                document.getElementById("errorTextArea")
+            );
+        }
     }
     let [transitionDelay, setTransitionDelay] = React.useState(.5);
     let handleChangeTo = (event) => {
@@ -64,6 +72,7 @@ export default (props) => {
                     <div>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
+                                error
                                 label="To When?"
                                 value={valueTo}
                                 onChange={(newValue) => {
@@ -76,6 +85,7 @@ export default (props) => {
                     <div>
                         <Button onClick={handleSubmit} variant="outlined" className="content-center">Lets go!</Button>
                     </div>
+                    <div id='errorTextArea' />
                 </ThemeProvider>
             </div>
         </motion.div>

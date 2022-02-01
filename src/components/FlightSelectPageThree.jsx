@@ -19,14 +19,23 @@ export default (props) => {
                     <Typography variant='subtitle1'>
                         Airport From: {props.searchState.APFrom} <br />
                         Airport To: {props.searchState.APTo} <br />
-                        Date From: {props.searchState.DateFrom} <br />
-                        Date To:{props.searchState.DateTo}
+                        Date From: {props.searchState.DateFrom.getDate()} <br />
+                        Date To: {props.searchState.DateTo.getDate()}
                     </Typography>
                     <Typography variant='h6'>
                         Is this ok?
                     </Typography>
-                    <Button variant="outlined">Yes!</Button>
-                    <Button variant="outlined">No, take me back!</Button>
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            props.setCurrentPage(4);
+                        }}
+                    >Yes!</Button>
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            props.setCurrentPage(1);
+                        }}>No, take me back!</Button>
                 </ThemeProvider>
             </div>
         </motion.div>

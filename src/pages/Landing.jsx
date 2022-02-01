@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import FlightSelectPageOne from "../components/FlightSelectPageOne";
 import FlightSelectPageTwo from "../components/FlightSelectPageTwo"
 import FlightSelectPageThree from '../components/FlightSelectPageThree';
-
+import ShowFlights from '../components/ShowFlights';
 let theme = createTheme({
     palette: {
         primary: {
@@ -51,6 +51,14 @@ export default function Example(props) {
                 {(currentPage === 3) && <FlightSelectPageThree
                     theme={theme}
                     searchState={searchState}
+                    setCurrentPage={setCurrentPage}
+                    key="fsp3" />}
+            </AnimatePresence>
+            <AnimatePresence>
+                {(currentPage === 4) && <ShowFlights
+                    theme={theme}
+                    searchState={searchState}
+                    setCurrentPage={setCurrentPage}
                     key="fsp3" />}
             </AnimatePresence>
         </div>
