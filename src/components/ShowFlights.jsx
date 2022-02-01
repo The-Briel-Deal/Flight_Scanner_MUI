@@ -13,7 +13,12 @@ export default (props) => {
         returns: null,
         link: null
     })
-
+    function dateConverter(date) {
+        let year = date.slice(0, 4);
+        let month = date.slice(5, 7);
+        let day = date.slice(8, 10);
+        return `${day}/${month}/${year}`;
+    }
     console.log(props.searchState)
     async function postData() {
         const response = await fetch('/search', {
@@ -52,8 +57,8 @@ export default (props) => {
                 <Typography variant='subtitle1'>
                     Price: {returnQuery.price}<br />
                     Connection: {returnQuery.connections}<br />
-                    Leaves:{returnQuery.leaves}<br />
-                    Returns: {returnQuery.returns}
+                    Leaves: {returnQuery.leaves ? dateConverter(returnQuery.leaves) : null}<br />
+                    Returns: {returnQuery.returns ? dateConverter(returnQuery.returns) : null}
                 </Typography>
                 <Button
                     variant="outlined"

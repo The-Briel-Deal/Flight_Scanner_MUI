@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import Title from "./Title"
 import { Typography, Button } from '@mui/material';
 export default (props) => {
+    function dateConverter(date) {
+        let year = date.slice(0, 4);
+        let month = date.slice(5, 7);
+        let day = date.slice(8, 10);
+        return `${day}/${month}/${year}`;
+    }
     return (
         <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -16,11 +22,11 @@ export default (props) => {
                     <Typography variant='h5'>
                         Your selections are as follows:
                     </Typography>
-                    <Typography variant='subtitle1'>
+                    <Typography variant='subtitle1' style={{ textAlign: center }}>
                         Airport From: {props.searchState.APFrom} <br />
                         Airport To: {props.searchState.APTo} <br />
-                        Date From: {props.searchState.DateFrom.getDate()} <br />
-                        Date To: {props.searchState.DateTo.getDate()}
+                        Date From: {`${props.searchState.DateFrom.getDate()}/${props.searchState.DateFrom.getMonth()}/${props.searchState.DateFrom.getFullYear()}`} <br />
+                        Date To: {`${props.searchState.DateTo.getDate()}/${props.searchState.DateTo.getMonth()}/${props.searchState.DateTo.getFullYear()}`}
                     </Typography>
                     <Typography variant='h6'>
                         Is this ok?

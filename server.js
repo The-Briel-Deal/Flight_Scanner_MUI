@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const searchAddr = "https://tequila-api.kiwi.com/v2/search"
 const app = express();
-console.log(apiKey);
+
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json())
 app.get("*", function (req, res) {
