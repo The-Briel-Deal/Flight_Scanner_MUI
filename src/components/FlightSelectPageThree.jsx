@@ -22,7 +22,7 @@ export default (props) => {
                     <Typography variant='h5'>
                         Your selections are as follows:
                     </Typography>
-                    <Typography variant='subtitle1' style={{ textAlign: center }}>
+                    <Typography variant='subtitle1' style={{ textAlign: "center" }}>
                         Airport From: {props.searchState.APFrom} <br />
                         Airport To: {props.searchState.APTo} <br />
                         Date From: {`${props.searchState.DateFrom.getDate()}/${props.searchState.DateFrom.getMonth()}/${props.searchState.DateFrom.getFullYear()}`} <br />
