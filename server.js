@@ -5,12 +5,17 @@ const express = require('express');
 const path = require('path');
 const searchAddr = "https://tequila-api.kiwi.com/v2/search"
 const app = express();
+const test_user = "user";
+const test_pass = "Password234";
+const bodyParser = require('body-parser');
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json())
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+// app.use(bodyParser.json())
 
 function dateConverter(date) {
     let year = date.slice(0, 4);
@@ -61,5 +66,18 @@ app.post("/search", (req, res) => {
         })
 
 })
+app.post("/log_in", (req, res) => {
+    // res.json({ requestBody: req.body });
+    let creds = req.body;
+    console.log(JSON.stringify(creds));
+    console.log(test_user === creds.eMail);
+    console.log(test_pass === creds.pWord);
+    if (test_user === creds.eMail && test_pass === creds.pWord) {
+        res.send({ authenticated: "true" })
+    }
+    else {
+        res.send({ authenticated: "false" })
+    }
+})
 
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3000);

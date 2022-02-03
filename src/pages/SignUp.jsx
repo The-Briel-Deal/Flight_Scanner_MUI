@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+export default (props) => {
     let [registerState, setRegisterState] = React.useState({
         fName: "",
         lName: "",
@@ -28,13 +28,15 @@ export default () => {
     }
 
     let onSubmit = () => {
-        console.log(registerState)
         setRegisterState({
             fName: "",
             lName: "",
             eMail: "",
             pWord: "",
         })
+    }
+    let onLogIn = () => {
+        props.setRegistered(true)
     }
 
     return (
@@ -89,6 +91,9 @@ export default () => {
                                 <div className="flex -mx-3">
                                     <div className="w-full px-3 mb-5">
                                         <button onClick={onSubmit} className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">REGISTER NOW</button>
+                                        <button onClick={() => {
+                                            onLogIn()
+                                        }} className="mt-5 block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">LOG IN</button>
                                     </div>
                                 </div>
                             </div>

@@ -40,6 +40,7 @@ export default (props) => {
                 returns: data.returns,
                 link: data.link
             })
+            setTimeout(() => console.log(returnQuery), 5000)
         })
         firstRun = false
     }

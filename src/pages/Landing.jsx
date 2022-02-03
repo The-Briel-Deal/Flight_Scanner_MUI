@@ -5,6 +5,7 @@ import FlightSelectPageOne from "../components/FlightSelectPageOne";
 import FlightSelectPageTwo from "../components/FlightSelectPageTwo"
 import FlightSelectPageThree from '../components/FlightSelectPageThree';
 import ShowFlights from '../components/ShowFlights';
+import Authentication from './Authentication'
 let theme = createTheme({
     palette: {
         primary: {
@@ -30,11 +31,9 @@ export default function Example(props) {
         DateFrom: "",
         DateTo: ""
     })
-    console.log(searchState);
     return (
-        <div>
+        <>
             <AnimatePresence>
-                <h1>I am the dev server :D</h1>
                 {(currentPage === 1) && <FlightSelectPageOne
                     theme={theme}
                     setSearchState={setSearchState}
@@ -60,8 +59,8 @@ export default function Example(props) {
                     theme={theme}
                     searchState={searchState}
                     setCurrentPage={setCurrentPage}
-                    key="fsp3" />}
+                    key="sf" />}
             </AnimatePresence>
-        </div>
+        </>
     )
 }
