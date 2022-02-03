@@ -17,8 +17,9 @@ function App() {
   const location = useLocation();
   return (
     <>
-      <SignUp />
-      {/* <Nav userState={[user, setUser]} />
+      {/* <SignUp /> */}
+      {/* <h1>hello</h1> */}
+      <Nav userState={[user, setUser]} />
       <div style={{ position: "relative" }}>
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.key}>
@@ -27,7 +28,7 @@ function App() {
             <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
         </AnimatePresence>
-      </div> */}
+      </div>
     </>
   );
 }

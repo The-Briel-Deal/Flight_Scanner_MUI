@@ -34,6 +34,7 @@ export default function Example(props) {
     return (
         <div>
             <AnimatePresence>
+                <h1>I am the dev server :D</h1>
                 {(currentPage === 1) && <FlightSelectPageOne
                     theme={theme}
                     setSearchState={setSearchState}

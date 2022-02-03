@@ -32,6 +32,7 @@ export default (props) => {
     }
     if (firstRun) {
         postData().then((data) => {
+            console.log(`data returned ${data.link}`)
             setReturnQuery({
                 price: data.price,
                 connections: data.connections,
