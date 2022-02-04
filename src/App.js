@@ -21,17 +21,23 @@ function App() {
   return (
     <>
       {(!auth) && <>
-        {(registered) && <Authentication
-          setAuth={setAuth}
-          auth={auth}
-          setRegistered={setRegistered}
-          registered={registered} />}
-        {(!registered) && <SignUp
-          setAuth={setAuth}
-          auth={auth}
-          setRegistered={setRegistered}
-          registered={registered} />
-        }</>}
+        <AnimatePresence>
+          {(registered) && <Authentication
+            setAuth={setAuth}
+            auth={auth}
+            setRegistered={setRegistered}
+            registered={registered} />}
+        </AnimatePresence>
+        <AnimatePresence>
+          {(!registered) && <SignUp
+            setAuth={setAuth}
+            auth={auth}
+            setRegistered={setRegistered}
+            registered={registered} />
+          }
+        </AnimatePresence>
+      </>
+      }
       {(auth) && <>
         <Nav userState={[user, setUser]} />
         <div style={{ position: "relative" }}>
