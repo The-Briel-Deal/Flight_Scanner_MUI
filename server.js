@@ -80,9 +80,9 @@ app.post("/search", (req, res) => {
 })
 app.post("/log_in", (req, res) => {
     let creds = req.body;
-    console.log(JSON.stringify(creds));
-    console.log(test_user === creds.eMail);
-    console.log(test_pass === creds.pWord);
+    // console.log(JSON.stringify(creds));
+    // console.log(test_user === creds.eMail);
+    // console.log(test_pass === creds.pWord);
     let dbCreds
     get(ref(rtdb, "users/")).then((data) => {
         dbCreds = data.val()
