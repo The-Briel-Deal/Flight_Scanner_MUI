@@ -15,6 +15,7 @@ const set = database.set
 const get = database.get
 const ref = database.ref
 const push = database.push
+const cookieParser = require('cookie-parser')
 const [apiKey, firebaseConfig] = secrets;
 
 const fbapp = initializeApp(firebaseConfig);
@@ -23,8 +24,14 @@ const rtdb = getDatabase(fbapp);
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json())
+app.use(cookieParser())
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.post("/is_authenticated", (req, res) => {
+    console.log(req.cookies)
+    res.send(req.cookies)
 });
 
 // app.use(bodyParser.json())
@@ -103,6 +110,7 @@ app.post("/log_in", (req, res) => {
 app.post("/sign_up", (req, res) => {
     let creds = req.body;
     push(ref(rtdb, "users/"), creds)
+    res.cookie('auth', "true")
     res.send({ response: "success" })
 })
 
