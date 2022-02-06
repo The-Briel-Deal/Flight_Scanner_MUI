@@ -3,15 +3,12 @@ import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 
-const userNavigation = [
-    { name: 'Your Profile', to: '#' },
-    { name: 'Settings', to: '#' },
-    { name: 'Sign out', to: '#' },
-]
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -36,6 +33,18 @@ export default function Nav(props) {
             setAboutUs(true);
         }
     }
+
+    let logOut = () => {
+        axios.post("/log_out");
+        props.setAuth(false);
+    }
+
+    const userNavigation = [
+        { name: 'Your Profile', to: "#" },
+        { name: 'Settings', to: "#" },
+        { name: 'Sign out', to: "#" },
+    ]
+
     const navigation = [
         {
             name: 'New Search 🔎', to: '/', current: newSearch, id: "newSearch"
@@ -181,8 +190,9 @@ export default function Nav(props) {
                                         {userNavigation.map((item) => (
                                             <Disclosure.Button
                                                 key={item.name}
+                                                onClick={logOut}
+
                                                 as="a"
-                                                href={item.href}
                                                 className="block px-3 py-2 rounded-md text-base font-medium text-black hover:black hover:bg-gray-200"
                                             >
                                                 {item.name}

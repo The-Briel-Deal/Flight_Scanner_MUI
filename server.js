@@ -34,6 +34,10 @@ app.post("/is_authenticated", (req, res) => {
     res.send(req.cookies)
 });
 
+app.post("log_out", (req, res) => {
+    res.clearCookie('auth');
+})
+
 // app.use(bodyParser.json())
 
 function dateConverter(date) {
@@ -96,6 +100,7 @@ app.post("/log_in", (req, res) => {
         let returned = false;
         for (user in dbCreds) {
             if (dbCreds[user].eMail === creds.eMail && dbCreds[user].pWord === creds.pWord) {
+                res.cookie('auth', "true")
                 res.send({ authenticated: "true" });
                 returned = true;
                 break;

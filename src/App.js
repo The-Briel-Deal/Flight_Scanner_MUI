@@ -51,7 +51,10 @@ function App() {
       </>
       }
       {(auth) && <>
-        <Nav userState={[user, setUser]} />
+        <Nav
+          userState={[user, setUser]}
+          setAuth={setAuth}
+          auth={auth} />
         <div style={{ position: "relative" }}>
           <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.key}>
