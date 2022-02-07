@@ -17,7 +17,7 @@ function App() {
     email: 'gabe@fordltc.net',
     imageUrl: 'https://lh3.googleusercontent.com/pw/AM-JKLXLDoZ9zszyLS3CvyKQC2ic9ggnSun8N35uFFk6dGmizpblBzauxZT1URZ2xiBA3nQR1kfo8fN9wjsOzNMU862jyaVVDikkNRO2ekTF-Hs3egpU14Vsyh2571ENIyRL_adIu_m8OVRGwkso_jXliJPMbg=w721-h961-no?authuser=0',
   });
-  const [auth, setAuth] = React.useState(false);
+  const [auth, setAuth] = React.useState(true);
   const isAuth = async () => {
     let auth
     await axios.post('/is_authenticated').then((response) => {
