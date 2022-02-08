@@ -119,8 +119,9 @@ app.post("/sign_up", (req, res) => {
     res.send({ response: "success" })
 })
 
-app.post("/new_flight_notification", (req, res)=>{
-    let request = req.body;
+app.post("/new_flight_notification", (req, res) => {
+    let request = req.body.formContents;
+    push(ref(rtdb, "notify/"), request)
     console.log(request);
 })
 

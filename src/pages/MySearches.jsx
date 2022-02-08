@@ -43,7 +43,8 @@ let MySearches = (props) => {
             airportFrom: airportFrom,
             maxPrice: price,
             dateTo: valueTo,
-            dateFrom: valueFrom
+            dateFrom: valueFrom,
+            phone: phone
         }
         axios.post("/new_flight_notification", { formContents });
         setPrice(100);
@@ -136,7 +137,7 @@ let MySearches = (props) => {
                         value={phone}
                         onChange={handleChangePhone} />
                     <Button variant="outlined"
-                        onSubmit={onFormSubmit}>Sign me up!</Button>
+                        onClick={onFormSubmit}>Sign me up!</Button>
                 </ThemeProvider>
             </div>
         </motion.div>
