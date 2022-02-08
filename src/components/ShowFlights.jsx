@@ -1,7 +1,7 @@
 import React from "react";
 import Title from "./Title";
 import { motion } from "framer-motion";
-import { ThemeProvider } from "@mui/system";
+import { ThemeProvider } from "@mui/material/styles";
 import { Typography, Button } from '@mui/material';
 let firstRun = true;
 export default (props) => {

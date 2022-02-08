@@ -1,6 +1,6 @@
 import Nav from '../components/Nav';
 import { Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { ThemeProvider } from '@mui/system';
+import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
 import React from "react";
 import ReactDom from 'react-dom';

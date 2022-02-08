@@ -10,8 +10,26 @@ import SignUp from "./pages/SignUp";
 import Authentication from "./pages/Authentication";
 import { is } from "date-fns/locale";
 import axios from 'axios';
+import { createTheme } from "@mui/material/styles";
 
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: '#6366f1',
+    }
+  },
+});
+
+theme = createTheme(theme, {
+  palette: {
+    info: {
+      main: theme.palette.primary.main,
+    },
+  },
+});
 function App() {
+
+
   const [user, setUser] = React.useState({
     name: 'Gabriel Ford',
     email: 'gabe@fordltc.net',
@@ -58,8 +76,12 @@ function App() {
         <div style={{ position: "relative" }}>
           <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.key}>
-              <Route path="/" element={<Landing />} />
-              <Route path="/mysearches" element={<MySearches />} />
+              <Route
+
+                path="/" element={<Landing theme={theme} />} />
+              <Route
+
+                path="/mysearches" element={<MySearches theme={theme} />} />
               <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
           </AnimatePresence>

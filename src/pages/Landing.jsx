@@ -1,4 +1,3 @@
-import { createTheme } from '@mui/material/styles';
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import FlightSelectPageOne from "../components/FlightSelectPageOne";
@@ -6,21 +5,6 @@ import FlightSelectPageTwo from "../components/FlightSelectPageTwo"
 import FlightSelectPageThree from '../components/FlightSelectPageThree';
 import ShowFlights from '../components/ShowFlights';
 import Authentication from './Authentication'
-let theme = createTheme({
-    palette: {
-        primary: {
-            main: '#6366f1',
-        }
-    },
-});
-
-theme = createTheme(theme, {
-    palette: {
-        info: {
-            main: theme.palette.primary.main,
-        },
-    },
-});
 
 export default function Example(props) {
 
@@ -35,28 +19,28 @@ export default function Example(props) {
         <>
             <AnimatePresence>
                 {(currentPage === 1) && <FlightSelectPageOne
-                    theme={theme}
+                    theme={props.theme}
                     setSearchState={setSearchState}
                     setCurrentPage={setCurrentPage}
                     key="fsp1" />}
             </AnimatePresence>
             <AnimatePresence>
                 {(currentPage === 2) && <FlightSelectPageTwo
-                    theme={theme}
+                    theme={props.theme}
                     setSearchState={setSearchState}
                     setCurrentPage={setCurrentPage}
                     key="fsp2" />}
             </AnimatePresence>
             <AnimatePresence>
                 {(currentPage === 3) && <FlightSelectPageThree
-                    theme={theme}
+                    theme={props.theme}
                     searchState={searchState}
                     setCurrentPage={setCurrentPage}
                     key="fsp3" />}
             </AnimatePresence>
             <AnimatePresence>
                 {(currentPage === 4) && <ShowFlights
-                    theme={theme}
+                    theme={props.theme}
                     searchState={searchState}
                     setCurrentPage={setCurrentPage}
                     key="sf" />}

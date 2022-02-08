@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@mui/system';
+import { ThemeProvider } from '@mui/material/styles';
 import React from "react";
 import { motion } from "framer-motion";
 import Title from "./Title"
