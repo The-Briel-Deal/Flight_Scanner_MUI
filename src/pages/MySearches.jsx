@@ -8,11 +8,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
-import VolumeDown from '@mui/icons-material/VolumeDown';
-import VolumeUp from '@mui/icons-material/VolumeUp';
+import TextField from '@mui/material/TextField';
+
 let MySearches = () => {
     const [airportTo, setAirportTo] = React.useState("TPA");
     const [airportFrom, setAirportFrom] = React.useState("JFK");
+    const [price, setPrice] = React.useState(100);
     let handleChangeTo = (event) => {
         setAirportTo(event.target.value);
     }
@@ -61,12 +62,13 @@ let MySearches = () => {
                         </Select>
                     </FormControl>
                 </Box>
+                <TextField id="outlined-basic" value={price} label="Max Price" variant="outlined" />
                 <Box sx={{ width: 200 }}>
-                    <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-                        <VolumeDown />
-                        <Slider aria-label="Volume" value={0} onChange={() => { }} />
-                        <VolumeUp />
-                    </Stack>
+                    <Slider value={price} onChange={
+                        (event) => {
+                            setPrice(event.target.value);
+                        }
+                    } aria-label="Default" valueLabelDisplay="auto" />
                 </Box>
             </div>
         </motion.div>
