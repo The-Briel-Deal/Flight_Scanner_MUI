@@ -9,6 +9,9 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { DatePicker } from '@mui/lab';
 
 let MySearches = () => {
     const [airportTo, setAirportTo] = React.useState("TPA");
@@ -20,6 +23,13 @@ let MySearches = () => {
     let handleChangeFrom = (event) => {
         setAirportFrom(event.target.value);
     }
+    let handleChangePrice = (event) => {
+        setPrice(event.target.value);
+    }
+
+    const [valueTo, setValueTo] = React.useState(null);
+    const [valueFrom, setValueFrom] = React.useState(null);
+
     return (
         <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -62,14 +72,41 @@ let MySearches = () => {
                         </Select>
                     </FormControl>
                 </Box>
-                <TextField id="outlined-basic" value={price} label="Max Price" variant="outlined" />
+                <TextField id="outlined-basic"
+                    onChange={handleChangePrice}
+                    value={price} label="Max Price" variant="outlined" />
                 <Box sx={{ width: 200 }}>
                     <Slider value={price} onChange={
-                        (event) => {
-                            setPrice(event.target.value);
-                        }
-                    } aria-label="Default" valueLabelDisplay="auto" />
+                        handleChangePrice
+                    }
+                        aria-label="Default"
+                        valueLabelDisplay="auto" max={1000} />
                 </Box>
+                <div>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            label="From When?"
+                            value={valueFrom}
+                            onChange={(newValue) => {
+                                setValueFrom(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                </div>
+                <div>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            error
+                            label="To When?"
+                            value={valueTo}
+                            onChange={(newValue) => {
+                                setValueTo(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                </div>
             </div>
         </motion.div>
     )
