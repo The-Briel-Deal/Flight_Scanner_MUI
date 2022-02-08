@@ -6,7 +6,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -14,6 +13,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Button from '@mui/material/Button'
 import { DatePicker } from '@mui/lab';
 import { ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 let MySearches = (props) => {
     const [airportTo, setAirportTo] = React.useState("TPA");
@@ -31,6 +31,22 @@ let MySearches = (props) => {
         setPrice(event.target.value);
     }
 
+
+    // Posting to DB on submit
+    let onFormSubmit = () => {
+        let formContents = {
+            airportTo: airportTo,
+            airportFrom: airportFrom,
+            maxPrice: price,
+            dateTo: valueTo,
+            dateFrom: valueFrom
+        }
+        axios.post("/new_flight_notification", { formContents });
+        setPrice(100);
+        setValueTo(null);
+        setValueFrom(null);
+
+    }
     return (
         <motion.div
             initial={{ opacity: 0, x: 50 }}
