@@ -119,4 +119,9 @@ app.post("/sign_up", (req, res) => {
     res.send({ response: "success" })
 })
 
+app.post("/new_flight_notification", (req, res)=>{
+    let request = req.body;
+    console.log(request);
+})
+
 app.listen(process.env.PORT || 3000);

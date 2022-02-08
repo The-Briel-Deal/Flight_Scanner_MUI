@@ -14,6 +14,7 @@ import Button from '@mui/material/Button'
 import { DatePicker } from '@mui/lab';
 import { ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { on } from 'nodemon';
 
 let MySearches = (props) => {
     const [airportTo, setAirportTo] = React.useState("TPA");
@@ -21,6 +22,10 @@ let MySearches = (props) => {
     const [price, setPrice] = React.useState(100);
     const [valueTo, setValueTo] = React.useState(null);
     const [valueFrom, setValueFrom] = React.useState(null);
+    const [phone, setPhone] = React.useState(null);
+    let handleChangePhone = (event) => {
+        setPhone(event.target.value)
+    }
     let handleChangeTo = (event) => {
         setAirportTo(event.target.value);
     }
@@ -125,8 +130,14 @@ let MySearches = (props) => {
                             />
                         </LocalizationProvider>
                     </div>
-                    <TextField id="outlined-basic" label="Phone Number" variant="outlined" />
-                    <Button variant="outlined">Sign me up!</Button>
+                    <TextField
+                        id="outlined-basic"
+                        label="Phone Number"
+                        variant="outlined"
+                        value={phone}
+                        onChange={handleChangePhone} />
+                    <Button variant="outlined"
+                        onSubmit={onFormSubmit}>Sign me up!</Button>
                 </ThemeProvider>
             </div>
         </motion.div>
