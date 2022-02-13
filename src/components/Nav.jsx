@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -106,7 +106,7 @@ export default function Nav(props) {
                                             </button> */}
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="ml-3 relative">
+                                            <Menu as="div" className="ml-3 relative z-50">
                                                 <div>
                                                     <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
