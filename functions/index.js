@@ -1,5 +1,6 @@
+const functions = require("firebase-functions");
 const axios = require('axios');
-const secrets = require('./secrets.js');
+const secrets = require('../secrets.js');
 const fs = require('fs');
 const express = require('express');
 const path = require('path');
@@ -26,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json())
 app.use(cookieParser())
 app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.post("/is_authenticated", (req, res) => {
@@ -50,10 +51,10 @@ function dateConverter(date) {
 app.post("/search", (req, res) => {
     // res.json({ requestBody: req.body });
     let query = req.body;
-    let airportFrom = query.APFrom;
-    let airportTo = query.APTo;
-    let dateFrom = query.DateFrom;
-    let dateTo = query.DateTo;
+    airportFrom = query.APFrom;
+    airportTo = query.APTo;
+    dateFrom = query.DateFrom;
+    dateTo = query.DateTo;
 
     console.log(query);
     axios.get(searchAddr, {
@@ -98,7 +99,7 @@ app.post("/log_in", (req, res) => {
     get(ref(rtdb, "users/")).then((data) => {
         dbCreds = data.val()
         let returned = false;
-        for (let user in dbCreds) {
+        for (user in dbCreds) {
             if (dbCreds[user].eMail === creds.eMail && dbCreds[user].pWord === creds.pWord) {
                 res.cookie('auth', "true")
                 res.send({ authenticated: "true" });
