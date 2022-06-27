@@ -50,7 +50,7 @@ function App() {
   const location = useLocation();
   return (
     <>
-      {(!auth) && <>
+      {(auth) && <>
         <AnimatePresence>
           {(registered) && <Authentication
             setAuth={setAuth}
@@ -68,7 +68,7 @@ function App() {
         </AnimatePresence>
       </>
       }
-      {(auth) && <>
+      {(!auth) && <>
         <Nav
           userState={[user, setUser]}
           setAuth={setAuth}
